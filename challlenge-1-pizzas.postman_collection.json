@@ -1,0 +1,150 @@
+{
+  "info": {
+    "name": "Pizza Restaurant API",
+    "description": "Collection for testing Pizza Restaurant API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Restaurants",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/restaurants",
+          "host": ["{{base_url}}"],
+          "path": ["restaurants"]
+        }
+      }
+    },
+    {
+      "name": "Get Restaurant by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/restaurants/1",
+          "host": ["{{base_url}}"],
+          "path": ["restaurants", "1"]
+        }
+      }
+    },
+    {
+      "name": "Get Restaurant by ID (Not Found)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/restaurants/999",
+          "host": ["{{base_url}}"],
+          "path": ["restaurants", "999"]
+        }
+      }
+    },
+    {
+      "name": "Delete Restaurant",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/restaurants/4",
+          "host": ["{{base_url}}"],
+          "path": ["restaurants", "4"]
+        }
+      }
+    },
+    {
+      "name": "Delete Restaurant (Not Found)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/restaurants/999",
+          "host": ["{{base_url}}"],
+          "path": ["restaurants", "999"]
+        }
+      }
+    },
+    {
+      "name": "Get All Pizzas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/pizzas",
+          "host": ["{{base_url}}"],
+          "path": ["pizzas"]
+        }
+      }
+    },
+    {
+      "name": "Create Restaurant Pizza (Valid)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"price\": 5,\n  \"pizza_id\": 1,\n  \"restaurant_id\": 1\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/restaurant_pizzas",
+          "host": ["{{base_url}}"],
+          "path": ["restaurant_pizzas"]
+        }
+      }
+    },
+    {
+      "name": "Create Restaurant Pizza (Invalid Price)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"price\": 35,\n  \"pizza_id\": 1,\n  \"restaurant_id\": 1\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/restaurant_pizzas",
+          "host": ["{{base_url}}"],
+          "path": ["restaurant_pizzas"]
+        }
+      }
+    },
+    {
+      "name": "Create Restaurant Pizza (Missing Fields)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"price\": 15\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/restaurant_pizzas",
+          "host": ["{{base_url}}"],
+          "path": ["restaurant_pizzas"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:5000"
+    }
+  ]
+}

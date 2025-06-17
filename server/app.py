@@ -1,33 +1,35 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from server.config import Config
 
-db = SQLAlchemy()
-migrate = Migrate()
+from server import create_app, db
+from server.models.restaurant import Restaurant
+from server.models.pizza import Pizza
+from server.models.restaurant_pizza import RestaurantPizza
 
-def create_app():
-    app = Flask(__name__)
-    app.config.from_object(Config)
-    
+app = create_app()
 
-    db.init_app(app)
-    migrate.init_app(app, db)
-    
-   
-    from server.models import restaurant, pizza, restaurant_pizza
-    
-   
-    from server.controllers.restaurant_controller import restaurant_bp
-    from server.controllers.pizza_controller import pizza_bp
-    from server.controllers.restaurant_pizza_controller import restaurant_pizza_bp
-    
-    app.register_blueprint(restaurant_bp)
-    app.register_blueprint(pizza_bp)
-    app.register_blueprint(restaurant_pizza_bp)
-    
-    return app
+@app.route('/')
+def home():
+    return "Pizza Restaurant API"
 
 if __name__ == '__main__':
-    app = create_app()
+    app.run(debug=True)
+from server import create_app, db
+from server.models.restaurant import Restaurant
+from server.models.pizza import Pizza
+from server.models.restaurant_pizza import RestaurantPizza
+from server.controllers.restaurant_controller import init_restaurant_routes
+from server.controllers.pizza_controller import init_pizza_routes
+from server.controllers.restaurant_pizza_controller import init_restaurant_pizza_routes
+
+app = create_app()
+
+
+init_restaurant_routes(app)
+init_pizza_routes(app)
+init_restaurant_pizza_routes(app)
+
+@app.route('/')
+def home():
+    return "Pizza Restaurant API"
+
+if __name__ == '__main__':
     app.run(debug=True)
